@@ -261,6 +261,11 @@ func startSpanInternal(name string, hasParent bool, parent SpanContext, remotePa
 	return span
 }
 
+func (s *Span) PrintExporters() string {
+	exp, _ := exporters.Load().(exportersMap)
+	fmt.Sprintf("%#v", exp)
+}
+
 // End ends the span.
 func (s *Span) End() {
 	if s == nil {
