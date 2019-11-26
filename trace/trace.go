@@ -293,8 +293,6 @@ func (s *Span) End() {
 			if mustExport {
 				for e := range exp {
 					e.ExportSpan(sd)
-					fmt.Println("Printing ExportSpan")
-					fmt.Prinln(e.ExportSpan(sd))
 				}
 			}
 		}
