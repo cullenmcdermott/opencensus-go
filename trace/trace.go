@@ -290,10 +290,11 @@ func (s *Span) End() {
 				s.spanStore.finished(s, sd)
 			}
 			fmt.Printf("Exporters: %#v\n", exp)
-			fmt.Printf("Exporters: %p\n", exp)
 			if mustExport {
 				for e := range exp {
 					e.ExportSpan(sd)
+					fmt.Println("Printing ExportSpan")
+					fmt.Prinln(e.ExportSpan(sd))
 				}
 			}
 		}
