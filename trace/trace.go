@@ -289,7 +289,8 @@ func (s *Span) End() {
 			if s.spanStore != nil {
 				s.spanStore.finished(s, sd)
 			}
-			fmt.Printf("Exporters: %+v\n", exp)
+			fmt.Printf("Exporters: %#v\n", exp)
+			fmt.Printf("Exporters: %p\n", exp)
 			if mustExport {
 				for e := range exp {
 					e.ExportSpan(sd)
