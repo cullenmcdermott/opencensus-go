@@ -279,14 +279,17 @@ func (s *Span) End() {
 	}
 	s.endOnce.Do(func() {
 		exp, _ := exporters.Load().(exportersMap)
+		fmt.Printf("Printing exporters after load %v\n", exp)
 		mustExport := s.spanContext.IsSampled() && len(exp) > 0
+		fmt.Printf("Printing mustExport %v\n", mustExport)
 		if s.spanStore != nil || mustExport {
 			sd := s.makeSpanData()
+			fmt.Printf("Printing spandata: %v\n", sd)
 			sd.EndTime = internal.MonotonicEndTime(sd.StartTime)
 			if s.spanStore != nil {
 				s.spanStore.finished(s, sd)
 			}
-			fmt.Printf("Exporters: %#v\n", exp)
+			fmt.Printf("Exporters: %+v\n", exp)
 			if mustExport {
 				for e := range exp {
 					e.ExportSpan(sd)
